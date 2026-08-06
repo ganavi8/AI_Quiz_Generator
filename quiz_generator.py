@@ -3,9 +3,10 @@ from groq import Groq
 from config import GROQ_API_KEY
 from config import GROQ_API_KEY
 
-print("=" * 50)
-print("Groq Key Loaded:", GROQ_API_KEY[:10] + "...")
-print("=" * 50)
+if GROQ_API_KEY:
+    print("Groq Key Loaded Successfully")
+else:
+    print("Groq API Key Not Found")
 
 client = Groq(api_key=GROQ_API_KEY)
 
