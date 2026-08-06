@@ -1,26 +1,13 @@
-import os
 import json
-
-from dotenv import load_dotenv
+import streamlit as st
 from groq import Groq
 
-
-load_dotenv()
-
-
 client = Groq(
-    api_key=os.getenv("GROQ_API_KEY")
+    api_key=st.secrets["GROQ_API_KEY"]
 )
 
 
-
-def generate_quiz(
-        topic,
-        difficulty,
-        num_questions,
-        quiz_type
-):
-
+def generate_quiz(topic, difficulty, num_questions, quiz_type):
 
     prompt = f"""
 Generate a {quiz_type} quiz.
@@ -33,7 +20,6 @@ Difficulty:
 
 Number of Questions:
 {num_questions}
-
 
 Return ONLY JSON.
 
@@ -62,32 +48,20 @@ Rules:
 - No markdown.
 """
 
-
     response = client.chat.completions.create(
-
         model="llama-3.3-70b-versatile",
-
         messages=[
             {
-                "role":"user",
-                "content":prompt
+                "role": "user",
+                "content": prompt
             }
         ],
-
         temperature=0.5,
-
-        response_format={
-            "type":"json_object"
-        }
-
+        response_format={"type": "json_object"}
     )
-
-
 
     result = response.choices[0].message.content
 
-
     data = json.loads(result)
-
 
     return data["questions"]
