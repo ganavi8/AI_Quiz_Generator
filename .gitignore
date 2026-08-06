@@ -7,12 +7,13 @@ venv/
 __pycache__/
 *.py[cod]
 *.pyo
+*.egg-info/
 
 # Environment Variables
 .env
 .streamlit/secrets.toml
 
-# Streamlit cache
+# Streamlit
 .streamlit/cache/
 
 # VS Code
@@ -21,6 +22,6 @@ __pycache__/
 # Logs
 *.log
 
-# OS files
+# Operating System Files
 .DS_Store
 Thumbs.db
